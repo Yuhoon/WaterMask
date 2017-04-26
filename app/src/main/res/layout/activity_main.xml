@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center_horizontal">
+
+    <data>
+
+        <import type="com.wcong.watermask.photo.WaterMask.DefWaterMaskParam.Location" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="presenter"
+            type="com.wcong.watermask.MainActivity.Presenter" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="输入水印"
+                android:textSize="12dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:background="@drawable/bg_txt_select"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick='@{(View)->presenter.onTypeSelect(View,Location.left_top)}'
+                    android:padding="10dp"
+                    android:text="左上"
+                    android:textColor="@color/__picker_black_40" />
+
+                <TextView
+                    android:background="@drawable/bg_txt_select"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick='@{(View)->presenter.onTypeSelect(View,Location.right_top)}'
+                    android:padding="10dp"
+                    android:text="右上"
+                    android:textColor="@color/__picker_black_40" />
+
+                <TextView
+                    android:background="@drawable/bg_txt_select"
+                    android:id="@+id/txt_center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick='@{(View)->presenter.onTypeSelect(View,Location.center)}'
+                    android:padding="10dp"
+                    android:text="中间"
+                    android:textColor="@color/__picker_black_40" />
+
+                <TextView
+                    android:background="@drawable/bg_txt_select"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick='@{(View)->presenter.onTypeSelect(View,Location.left_bottom)}'
+                    android:padding="10dp"
+                    android:text="左下"
+                    android:textColor="@color/__picker_black_40" />
+
+                <TextView
+                    android:background="@drawable/bg_txt_select"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick='@{(View)->presenter.onTypeSelect(View,Location.right_bottom)}'
+                    android:padding="10dp"
+                    android:text="右下"
+                    android:textColor="@color/__picker_black_40" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{()->presenter.onCapture()}"
+                android:text="照相" />
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:onClick="@{()->presenter.onPreview()}" />
+        </LinearLayout>
+    </ScrollView>
+
+</layout>
