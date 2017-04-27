@@ -1,9 +1,11 @@
 package com.wcong.watermask.photo;
 
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -42,7 +44,14 @@ public class PhotoCaptureActivity extends CallBackActivity {
         if (EasyPermissions.hasPermissions(PhotoCaptureActivity.this, perms)) {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             imgUri = createImageFile();
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imgUri));
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imgUri));
+            } else {
+                ContentValues contentValues = new ContentValues(1);
+                contentValues.put(MediaStore.Images.Media.DATA, imgUri.getAbsolutePath());
+                Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+            }
             startActivityForResult(takePictureIntent, REQUEST_CODE);
         } else {
             EasyPermissions.requestPermissions(this, "", 1, perms);
