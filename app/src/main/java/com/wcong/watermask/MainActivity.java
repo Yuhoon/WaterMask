@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements WaterMask.WaterMa
 
     private void init() {
         binding.setPresenter(new Presenter());
+        //初始化水印工具
         waterMaskHelper = new WaterMaskHelper(this, this, this);
         lastView = binding.txtCenter;
         lastView.setSelected(true);
